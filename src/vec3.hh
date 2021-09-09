@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 
-namespace cr3on_rt_vec {
-template <typename T=float>
+namespace cr3on_rt {
+template <typename T = float>
 class Vec3 {
  public:
   T x, y, z;

@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace cr3on_rt_vec {
+namespace cr3on_rt {
 template <typename T>
 Vec3<T>::Vec3(T cx, T cy, T cz) : x(cx), y(cy), z(cz) {}
 
@@ -59,7 +59,7 @@ T dot_product(Vec3<T> v1, Vec3<T> v2) {
 
 template <typename T>
 T cross_product(Vec3<T> v1, Vec3<T> v2) {
-  assert(false);
+  throw std::exception("TODO Not Implemented");
 }
 
 template <typename T>
@@ -69,13 +69,15 @@ std::ostream& operator<<(std::ostream& os, Vec3<T>& v) {
 
 }  // namespace cr3on_rt_vec
 
-void cr3on_rt_vec::test_vec3() {
-  Vec3<double> v1 = Vec3<double>(2, 2, 2);
+void cr3on_rt::test_vec3() {
+  Vec3<> v1 = Vec3<>(2, 2, 2);
   std::cout << "v1=" << v1 << std::endl;
 
-  Vec3<double> v2 = Vec3<double>(1, 2, 3);
+  Vec3<> v2 = Vec3<>(1, 2, 3);
   std::cout << "v2=" << v2 << std::endl;
 
-  std::cout << "v1+v2=" << v1 + v2 << std::endl;
+  Vec3<> sum = v1 + v2;
+
+  std::cout << "v1+v2=" << sum << std::endl;
 
 }

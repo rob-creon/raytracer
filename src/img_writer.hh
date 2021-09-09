@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace cr3on_rt_imgwriter {
+namespace cr3on_rt {
 void write_pixels_to_file(std::string filename, unsigned int width,
                           unsigned int height, unsigned char* img) {
   unsigned int width_in_bytes = width * 3;
