@@ -12,10 +12,10 @@ void write_pixels_to_file(std::string filename, unsigned int width,
   #pragma warning(disable : 4333 838)
   unsigned char file_header[14] = {'B',                             // 0
                                    'M',                             // 1
-                                   (unsigned char)file_size,        // 2
-                                   (unsigned char)file_size >> 8,   // 3
-                                   (unsigned char)file_size >> 16,  // 4
-                                   (unsigned char)file_size >> 24,  // 5
+                                   (unsigned char)(file_size),        // 2
+                                   (unsigned char)(file_size >> 8),   // 3
+                                   (unsigned char)(file_size >> 16),  // 4
+                                   (unsigned char)(file_size >> 24),  // 5
                                    0,                               // 6
                                    0,                               // 7
                                    0,                               // 8
@@ -29,14 +29,14 @@ void write_pixels_to_file(std::string filename, unsigned int width,
                                    0,
                                    0,
                                    0,
-                                   (unsigned char)width,
-                                   (unsigned char)width >> 8,
-                                   (unsigned char)width >> 16,
-                                   (unsigned char)width >> 24,
-                                   (unsigned char)height,
-                                   (unsigned char)height >> 8,
-                                   (unsigned char)height >> 16,
-                                   (unsigned char)height >> 24,
+                                   (unsigned char)(width),
+                                   (unsigned char)(width >> 8),
+                                   (unsigned char)(width >> 16),
+                                   (unsigned char)(width >> 24),
+                                   (unsigned char)(height),
+                                   (unsigned char)(height >> 8),
+                                   (unsigned char)(height >> 16),
+                                   (unsigned char)(height >> 24),
                                    1,
                                    0,
                                    24,
@@ -67,7 +67,7 @@ void write_pixels_to_file(std::string filename, unsigned int width,
   unsigned char padding[3] = {0, 0, 0};
   unsigned int padding_size = (4 - (width_in_bytes % 4)) % 4;
 
-  FILE* file = std::fopen("test.bmp", "wb");
+  FILE* file = std::fopen(filename.c_str(), "wb");
   fwrite(file_header, 1, sizeof(file_header) / sizeof(file_header[0]), file);
   fwrite(info_header, 1, sizeof(info_header) / sizeof(info_header[0]), file);
   for (unsigned int i = 0; i < height; i++) {

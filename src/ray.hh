@@ -4,7 +4,8 @@
 namespace cr3on_rt {
 class Ray {
  public:
-  Vec3<> dir;
-  Vec3<> origin;
+  Ray(Vec3 d, Vec3 o);
+  Vec3 dir;
+  Vec3 origin;
 };
 }  // namespace cr3on_rt
