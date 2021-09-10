@@ -6,7 +6,7 @@
 
 namespace cr3on_rt {
 struct Color {
-  unsigned char r, g, b;
+  float r, g, b;
 };
 
 class Light {

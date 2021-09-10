@@ -4,14 +4,9 @@ namespace cr3on_rt {
 Camera::Camera(unsigned int iwidth, unsigned int iheight) {
   float width = float(iwidth);
   float height = float(iheight);
-
   this->horizontal = Vec3(2, 0, 0);
   this->vertical = Vec3(0, height * (2/width), 0);
   this->bottom_left = Vec3(-horizontal.x/2.0, -vertical.y/2.0, -1);
-
-  std::cout << "horizontal=" << horizontal << ", vertical=" << vertical
-            << ", bl=" << bottom_left << std::endl;
-
   this->origin = Vec3(0, 0, 0);
 }
 Ray Camera::generate_ray(float u, float v) {
