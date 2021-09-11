@@ -26,13 +26,14 @@ class Object {
   Color color;
   Vec3 pos;
   virtual bool intersect(Ray ray, Vec3& intersection) = 0;
+  virtual Vec3 normal(Vec3 intersection) = 0;
 };
 
 class Sphere : Object {
  public:
   Sphere(Vec3 pos, float radius, Color color);
   virtual bool intersect(Ray ray, Vec3& intersection);
-
+  virtual Vec3 normal(Vec3 intersection);
  private:
   float radius;
 };

@@ -1,4 +1,5 @@
 #include "scene.hh"
+
 #include "vec3.hh"
 
 namespace cr3on_rt {
@@ -17,7 +18,7 @@ bool Sphere::intersect(Ray ray, Vec3& intersection) {
 
   Vec3 oc = origin - center;
 
-  float a = dot_product(u, u); //u.get_squared_length();
+  float a = dot_product(u, u);  // u.get_squared_length();
   float b = 2.0 * dot_product(u, oc);
   float c = oc.get_squared_length() - (radius * radius);
 
@@ -41,5 +42,9 @@ bool Sphere::intersect(Ray ray, Vec3& intersection) {
   } else {
     return false;
   }
+}
+
+Vec3 Sphere::normal(Vec3 intersection) {
+  return (intersection - this->pos).get_normalized();
 }
 }  // namespace cr3on_rt
