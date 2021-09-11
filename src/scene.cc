@@ -1,5 +1,4 @@
 #include "scene.hh"
-
 #include "vec3.hh"
 
 namespace cr3on_rt {

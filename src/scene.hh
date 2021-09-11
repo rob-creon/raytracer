@@ -19,7 +19,6 @@ class Light {
     this->color = c;
     this->intensity = i;
   }
-  // virtual bool test() = 0;
 };
 
 class Object {
@@ -44,8 +43,8 @@ struct Scene {
   std::vector<Object*> objects;
 
   Scene() {
-    std::vector<Light> lights = std::vector<Light>();
-    std::vector<Object*> objects = std::vector<Object*>();
+    lights = std::vector<Light>();
+    objects = std::vector<Object*>();
   }
 };
 }  // namespace cr3on_rt
