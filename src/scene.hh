@@ -34,8 +34,19 @@ class Sphere : Object {
   Sphere(Vec3 pos, float radius, Color color);
   virtual bool intersect(Ray ray, Vec3& intersection);
   virtual Vec3 normal(Vec3 intersection);
+
  private:
   float radius;
+};
+
+class Plane : Object {
+ public:
+  Plane(Vec3 pos, Vec3 norm, Color color);
+  virtual bool intersect(Ray ray, Vec3& intersection);
+  virtual Vec3 normal(Vec3 intersection);
+
+ private:
+  Vec3 norm;
 };
 
 struct Scene {

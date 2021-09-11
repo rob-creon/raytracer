@@ -47,4 +47,23 @@ bool Sphere::intersect(Ray ray, Vec3& intersection) {
 Vec3 Sphere::normal(Vec3 intersection) {
   return (intersection - this->pos).get_normalized();
 }
+
+Plane::Plane(Vec3 pos, Vec3 norm, Color color) {
+  this->pos = pos;
+  this->norm = norm;
+  this->color = color;
+}
+bool Plane::intersect(Ray ray, Vec3& intersection) {
+  float denom = dot_product(ray.dir, norm);
+  if (denom == 0) return false;
+  float numer = dot_product(pos - ray.origin, norm);
+  float d = numer / denom;
+  if (d < 0) {
+    return false;
+  } else {
+    intersection = ray.origin + (ray.dir * d);
+    return true;
+  }
+}
+Vec3 Plane::normal(Vec3 intersection) { return norm; }
 }  // namespace cr3on_rt
