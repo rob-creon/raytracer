@@ -4,10 +4,9 @@
 
 namespace cr3on_rt {
 
-Sphere::Sphere(Vec3 cpos, float cr, Color color) {
+Sphere::Sphere(Vec3 cpos, float cr, Color color) : Object(color) {
   this->pos = cpos;
   this->radius = cr;
-  this->color = color;
 }
 
 bool Sphere::intersect(Ray ray, Vec3& intersection) {
@@ -48,10 +47,9 @@ Vec3 Sphere::normal(Vec3 intersection) {
   return (intersection - this->pos).get_normalized();
 }
 
-Plane::Plane(Vec3 pos, Vec3 norm, Color color) {
+Plane::Plane(Vec3 pos, Vec3 norm, Color color) : Object(color) {
   this->pos = pos;
   this->norm = norm;
-  this->color = color;
 }
 bool Plane::intersect(Ray ray, Vec3& intersection) {
   float denom = dot_product(ray.dir, norm);
@@ -66,4 +64,15 @@ bool Plane::intersect(Ray ray, Vec3& intersection) {
   }
 }
 Vec3 Plane::normal(Vec3 intersection) { return norm; }
+Color Plane::color(Vec3 point) {
+  float grid_size = 1.0;
+  float gridded_x = fmod(abs(point.x / grid_size), 1.0);
+  float gridded_z = fmod(abs(point.z / grid_size), 1.0);
+
+  if (gridded_x >= 0.5 ^ gridded_z >= 0.5) {
+    return Object::color(point);
+  } else {
+    return Color(1, 1, 1);
+  }
+}
 }  // namespace cr3on_rt

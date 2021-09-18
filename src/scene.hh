@@ -23,10 +23,14 @@ class Light {
 
 class Object {
  public:
-  Color color;
   Vec3 pos;
   virtual bool intersect(Ray ray, Vec3& intersection) = 0;
   virtual Vec3 normal(Vec3 intersection) = 0;
+  virtual Color color(Vec3 point) { return objColor; }
+
+ protected:
+  Color objColor;
+  Object(Color c) { this->objColor = c; }
 };
 
 class Sphere : Object {
@@ -44,7 +48,7 @@ class Plane : Object {
   Plane(Vec3 pos, Vec3 norm, Color color);
   virtual bool intersect(Ray ray, Vec3& intersection);
   virtual Vec3 normal(Vec3 intersection);
-
+  virtual Color color(Vec3 point);
  private:
   Vec3 norm;
 };

@@ -1,11 +1,11 @@
 #include "camera.h"
-#include "img_writer.hh"
+#include "img_io.hh"
 #include "scene.hh"
 
 #define SCREEN_WIDTH 1920
 #define SCREEN_HEIGHT 1080
 #define TOTAL_NUM_PIXELS SCREEN_WIDTH *SCREEN_HEIGHT
-#define MSAA_SAMPLES 16
+#define MSAA_SAMPLES 100
 #define MAX_RECURSION_DEPTH 5
 #define EPSILON 0.00001
 //#define INFINITY 3.402823466e+38F
@@ -57,7 +57,7 @@ Color trace(Scene scene, Ray &ray, int depth) {
     float fresnel =
         0.1 * (one_minus_fr * one_minus_fr * one_minus_fr) + 0.9 * (0.1);
     Color reflection = trace(scene, reflected_ray, depth + 1);
-    Color surface = collision.obj->color;
+    Color surface = collision.obj->color(collision.intersection);
     Color mixed{};
     mixed.r = reflection.r * fresnel + surface.r * (1.0 - fresnel);
     mixed.g = reflection.g * fresnel + surface.g * (1.0 - fresnel);
@@ -65,7 +65,8 @@ Color trace(Scene scene, Ray &ray, int depth) {
     return mixed;
   } else {
     bool is_shadow = collides(scene, reflected_ray);
-    return is_shadow ? Color(0, 0, 0) : collision.obj->color;
+    return is_shadow ? Color(0, 0, 0)
+                     : collision.obj->color(collision.intersection);
   }
 }
 
@@ -106,7 +107,7 @@ int main() {
 
   Scene scene{};
   scene.objects.push_back(
-      (Object *)new Plane(Vec3(0, -0.5, 0), Vec3(0, 1, 0), Color(1, 1, 1)));
+      (Object *)new Plane(Vec3(0, -0.5, 0), Vec3(0, 1, 0), Color(0.5, 0.2, 0)));
   scene.objects.push_back(
       (Object *)new Sphere(Vec3(-1.8, 0.2, -3), 0.7, Color(0.1, 0, 0)));
   scene.objects.push_back(
